@@ -30,10 +30,8 @@ def merge_tasks(scenario_id, tasks):
                     station_id=current.station_id,
                     shelf_id=current.shelf_id,
                     actions=actions,
-                    logical_task_ids=[
-                    f"{scenario_id}:{current.sequence}",
-                    f"{scenario_id}:{next_task.sequence}",
-                ],
+                    logical_task_ids=
+                    f"{scenario_id}:{current.sequence}&{next_task.sequence}"
                 )
             )
             i += 2
@@ -48,7 +46,7 @@ def merge_tasks(scenario_id, tasks):
                     station_id=current.station_id,
                     shelf_id=current.shelf_id,
                     actions=actions,
-                    logical_task_ids=[f"{scenario_id}:{current.sequence}"],
+                    logical_task_ids=f"{scenario_id}:{current.sequence}",
                 )
             )
             i += 1

@@ -14,3 +14,7 @@ class ScenarioPayload(BaseModel):
     type: str
     stations: List[str]
     tasks: List[TaskPayload]
+
+class RcsCallbackPayload(BaseModel):
+    mission_id: str
+    status: str

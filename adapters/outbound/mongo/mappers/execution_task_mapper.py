@@ -5,7 +5,6 @@ class ExecutionTaskMapper:
     @staticmethod
     def to_document(t: ExecutionTask) -> dict:
         return {
-                "_id": f"{t.scenario_id}:{t.station_id}:{t.logical_task_ids[0]}",
                 "logical_task_ids": t.logical_task_ids,
                 "scenario_id": t.scenario_id,
                 "station_id": t.station_id,

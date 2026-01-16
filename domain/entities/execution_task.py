@@ -8,19 +8,3 @@ class ExecutionTask:
         self.logical_task_ids = logical_task_ids
         self.scenario_id = scenario_id
         self.status = TaskStatus.PENDING
-
-    def move(self):
-        validate_transition(self.status, TaskStatus.MOVING)
-        self.status = TaskStatus.MOVING
-
-    def arrive_station(self):
-        validate_transition(self.status, TaskStatus.AT_STATION)
-        self.status = TaskStatus.AT_STATION
-
-    def wait_return(self):
-        validate_transition(self.status, TaskStatus.WAITING_RETURN)
-        self.status = TaskStatus.WAITING_RETURN
-
-    def complete(self):
-        validate_transition(self.status, TaskStatus.DONE)
-        self.status = TaskStatus.DONE

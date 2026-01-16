@@ -9,9 +9,3 @@ class Scenario:
         self.scenario_type = scenario_type
         self.status = ScenarioStatus.CREATED
 
-    def start(self):
-        self.status = ScenarioStatus.RUNNING
-
-    def is_completed(self) -> bool:
-        return all(t.status.name == "DONE" for t in self.tasks)
-

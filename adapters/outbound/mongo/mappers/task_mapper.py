@@ -9,3 +9,12 @@ class TaskMapper:
             "station_id": task.station_id,
             "side": task.side
         }
+
+    @staticmethod
+    def from_document(doc: dict) -> Task:
+        return Task(
+            sequence=doc["sequence"],
+            shelf_id=doc["shelf_id"],
+            station_id=doc["station_id"],
+            side=doc["side"]
+        )

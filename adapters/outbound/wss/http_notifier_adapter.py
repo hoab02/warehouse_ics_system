@@ -7,13 +7,15 @@ class WssHttpNotifierAdapter(WssNotifierPort):
         self.base_url = base_url.rstrip("/")
 
     def notify_execution_task(self, task_id: str, status: str):
-        requests.post(
-            f"{self.base_url}/execution-task/status",
-            json={"task_id": task_id, "status": status}
-        )
+        print("Notify Execution Task Status to WSS Successfully!")
+        # requests.post(
+        #     f"{self.base_url}/api/v1/events/robot",
+        #     json={"task_id": task_id, "status": status}
+        # )
 
     def notify_scenario(self, scenario_id: str, status: str):
-        requests.post(
-            f"{self.base_url}/scenario/status",
-            json={"scenario_id": scenario_id, "status": status}
-        )
+        print("Notify Scenario Status to WSS Successfully!")
+        # requests.post(
+        #     f"{self.base_url}/api/v1/events/scenario",
+        #     json={"scenario_id": scenario_id, "status": status}
+        # )

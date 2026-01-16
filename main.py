@@ -2,6 +2,7 @@ import time
 from threading import Thread
 from fastapi import FastAPI
 
+
 # =========================
 # CONFIG
 # =========================
@@ -19,13 +20,9 @@ from adapters.outbound.mongo.repositories.scenario_repo import (
 from adapters.outbound.mongo.repositories.execution_task_repo import (
     ExecutionTaskMongoRepository
 )
-from adapters.outbound.mongo.repositories.station_lock_repo import (
-    StationLockMongoRepository
+from adapters.outbound.mongo.repositories.resource_lock_repository import (
+    MongoResourceLockRepository
 )
-
-# from adapters.outbound.mongo.repositories.shelf_lock_repo import (
-#     ShelfLockMongoRepository
-# )
 
 
 # =========================
@@ -55,7 +52,6 @@ from adapters.outbound.wss.http_notifier_adapter import WssHttpNotifierAdapter
 from adapters.inbound.api.scenario_api import router as scenario_router
 from adapters.inbound.api.rcs_callback_api import router as rcs_callback_router
 
-
 # ======================================================
 # 1️⃣ FASTAPI APP
 # ======================================================
@@ -81,8 +77,7 @@ ensure_indexes(db)
 # ======================================================
 scenario_repository = ScenarioMongoRepository(db)
 execution_task_repository = ExecutionTaskMongoRepository(db)
-station_lock_repository = StationLockMongoRepository(db)
-# shelf_lock_repository = ShelfLockMongoRepository(db)
+resource_lock_repository = MongoResourceLockRepository(db)
 
 
 # ======================================================
@@ -116,7 +111,7 @@ create_scenario_use_case = CreateScenarioUseCase(
 
 scheduler = Scheduler(
     execution_task_repo=execution_task_repository,
-    station_lock=station_lock_repository,
+    resource_lock=resource_lock_repository,
     rcs_mission_port=rcs_mission_port,
     mission_builder=mission_builder
 )
@@ -124,7 +119,7 @@ scheduler = Scheduler(
 rcs_callback_handler = RcsCallbackHandler(
     execution_task_repo=execution_task_repository,
     scenario_repo=scenario_repository,
-    station_lock=station_lock_repository,
+    resource_lock=resource_lock_repository,
     status_notifier=wss_notifier_port
 )
 
@@ -134,13 +129,13 @@ rcs_callback_handler = RcsCallbackHandler(
 # ======================================================
 app.include_router(
     scenario_router,
-    prefix="/api/scenarios",
+    prefix="/api/v1/scenarios",
     tags=["Scenario"]
 )
 
 app.include_router(
     rcs_callback_router,
-    prefix="/api/rcs",
+    prefix="/api/rcs/callback",
     tags=["RCS Callback"]
 )
 

@@ -17,6 +17,20 @@ class ScenarioMapper:
 
     @staticmethod
     def from_document(doc: dict) -> Scenario:
-        scenario = Scenario(doc["scenario_id"], doc["type"], doc["station"], doc["tasks"])
-        scenario.status = doc["status"]
+        tasks = [
+            TaskMapper.from_document(t)
+            for t in doc.get("tasks", [])
+        ]
+
+        station_ids = list(dict.fromkeys(
+            t.station_id for t in tasks
+        ))
+
+        scenario = Scenario(
+            doc["scenario_id"],
+            doc["type"],
+            station_ids,
+            tasks
+        )
+        scenario.status = doc.get("status")
         return scenario

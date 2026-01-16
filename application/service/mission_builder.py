@@ -7,16 +7,14 @@ class MissionBuilder:
         self.callback_url = callback_url
 
     def build(self, execution_task):
+
         return {
-            "mission_id": execution_task.id,
+            "mission_id": execution_task.logical_task_ids,
             "scenario_id": execution_task.scenario_id,
             "type": "SHELF_OPERATION",
             "station_id": execution_task.station_id,
             "shelf_id": execution_task.shelf_id,
-            "actions": [
-                {"type": "MOVE_SHELF_TO_STATION", "station_id": execution_task.station_id},
-                {"type": "ROTATE_SHELF", "side": execution_task.side}
-            ],
+            "actions": [],
             "callback": {
                 "url": self.callback_url,
                 "method": "POST"

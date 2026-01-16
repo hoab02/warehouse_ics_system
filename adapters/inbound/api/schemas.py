@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from typing import List
 
-
 class TaskPayload(BaseModel):
     sequence: int
     shelf_id: str

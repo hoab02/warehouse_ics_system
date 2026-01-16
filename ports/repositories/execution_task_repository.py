@@ -23,3 +23,9 @@ class ExecutionTaskRepository(ABC):
     @abstractmethod
     def update_status(self, task_id: str, status: str) -> None:
         pass
+
+    @abstractmethod
+    def find_created_by_scenario(
+            self, scenario_id: str
+    ) -> list[ExecutionTask]:
+        pass

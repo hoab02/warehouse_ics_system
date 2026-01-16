@@ -12,7 +12,8 @@ class ScenarioMapper:
             "status": s.status,
             "tasks":[
                 TaskMapper.to_document(t) for t in s.tasks
-            ]
+            ],
+            "created_at": s.created_at
         }
 
     @staticmethod

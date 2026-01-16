@@ -110,6 +110,7 @@ create_scenario_use_case = CreateScenarioUseCase(
 )
 
 scheduler = Scheduler(
+    scenario_repo=scenario_repository,
     execution_task_repo=execution_task_repository,
     resource_lock=resource_lock_repository,
     rcs_mission_port=rcs_mission_port,

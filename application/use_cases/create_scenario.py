@@ -15,6 +15,9 @@ class CreateScenarioUseCase:
         self.execution_task_repo = execution_task_repo
 
     def execute(self, scenario_dto):
+        existing = self.scenario_repo.get(scenario_dto.scenario_id)
+        if existing:
+            return existing.scenario_id
         validate_scenario_tasks(scenario_dto.tasks)
         tasks = []
         for idx, t in enumerate(scenario_dto.tasks):
@@ -39,7 +42,4 @@ class CreateScenarioUseCase:
         for execution_task in execution_tasks:
             self.execution_task_repo.save(execution_task)
 
-        return {
-            "scenario_id": scenario.scenario_id,
-            "execution_task_count": len(execution_tasks)
-        }
+        return scenario.scenario_id

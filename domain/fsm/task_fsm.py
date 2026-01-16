@@ -3,7 +3,7 @@ from domain.exceptions import InvalidStateTransition
 
 
 class TaskStatus(str, Enum):
-    PENDING = "PENDING"
+    PENDING = "PENDING"  # Bổ sung trạng thái FAILED, ưu tiên chạy lại trước.
     DISPATCHED = "DISPATCHED"
     MOVING = "MOVING"
     AT_STATION = "AT_STATION"

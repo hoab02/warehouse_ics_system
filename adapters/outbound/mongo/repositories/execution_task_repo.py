@@ -44,3 +44,28 @@ class ExecutionTaskMongoRepository(ExecutionTaskRepository):
         {"logical_task_ids": task_id},
         {"$set": {"status": status}}
         )
+
+
+    def find_created_by_scenario(
+            self, scenario_id: str
+    ) -> list[ExecutionTask]:
+        cursor = self.col.find(
+            {
+                "scenario_id": scenario_id,
+                "status": "CREATED"
+            }
+        ).sort("created_at", 1)
+
+        tasks = []
+        for doc in cursor:
+            tasks.append(
+                ExecutionTask(
+                    execution_task_id=doc["execution_task_id"],
+                    scenario_id=doc["scenario_id"],
+                    station_id=doc["station_id"],
+                    shelf_id=doc["shelf_id"],
+                    status=doc["status"]
+                )
+            )
+
+        return tasks

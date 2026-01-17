@@ -5,6 +5,7 @@ class ExecutionTaskMapper:
     @staticmethod
     def to_document(t: ExecutionTask) -> dict:
         return {
+                "base_sequence": t.base_sequence,
                 "logical_task_ids": t.logical_task_ids,
                 "scenario_id": t.scenario_id,
                 "station_id": t.station_id,
@@ -17,6 +18,7 @@ class ExecutionTaskMapper:
     @staticmethod
     def from_document(doc: dict) -> ExecutionTask:
         task = ExecutionTask(
+            doc["base_sequence"],
             doc["scenario_id"],
             doc["station_id"],
             doc["shelf_id"],

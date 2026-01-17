@@ -26,6 +26,7 @@ def merge_tasks(scenario_id, tasks):
 
             execution_tasks.append(
                 ExecutionTask(
+                    base_sequence=current.sequence,
                     scenario_id = scenario_id,
                     station_id=current.station_id,
                     shelf_id=current.shelf_id,
@@ -42,6 +43,7 @@ def merge_tasks(scenario_id, tasks):
             ]
             execution_tasks.append(
                 ExecutionTask(
+                    base_sequence=current.sequence,
                     scenario_id=scenario_id,
                     station_id=current.station_id,
                     shelf_id=current.shelf_id,

@@ -38,7 +38,7 @@ class Scheduler:
             if not self.lock.acquire(
                     "station",
                     task.station_id,
-                    task.execution_task_id,
+                    task.logical_task_ids,
                     task.scenario_id
             ):
                 continue
@@ -47,7 +47,7 @@ class Scheduler:
             if not self.lock.acquire(
                     "shelf",
                     task.shelf_id,
-                    task.execution_task_id,
+                    task.logical_task_ids,
                     task.scenario_id
             ):
                 self.lock.release("station", task.station_id)
@@ -62,7 +62,7 @@ class Scheduler:
 
                 # update task status
                 self.execution_task_repo.update_status(
-                    task.execution_task_id,
+                    task.logical_task_ids,
                     "DISPATCHED"
                 )
 
@@ -72,45 +72,3 @@ class Scheduler:
                 self.lock.release("shelf", task.shelf_id)
                 raise e
 
-    # def tick(self):
-    #     tasks = self.execution_task_repo.find_created()
-    #
-    #     for task in tasks:
-    #         # lock station
-    #         if not self.lock.acquire(
-    #             "station",
-    #             task.station_id,
-    #             task.logical_task_ids,
-    #             task.scenario_id
-    #         ):
-    #             continue
-    #
-    #         # lock shelf
-    #         if not self.lock.acquire(
-    #             "shelf",
-    #             task.shelf_id,
-    #             task.logical_task_ids,
-    #             task.scenario_id
-    #         ):
-    #             self.lock.release("station", task.station_id)
-    #             continue
-    #
-    #         try:
-    #             # build mission
-    #             mission = self.builder.build(task)
-    #
-    #             # send to RCS
-    #             # self.rcs.send_mission(mission)
-    #
-    #             # update status
-    #             self.execution_task_repo.update_status(
-    #                 task.logical_task_ids,
-    #                 "DISPATCHED"
-    #             )
-    #
-    #
-    #         except Exception as e:
-    #             # rollback
-    #             self.lock.release("station", task.station_id)
-    #             self.lock.release("shelf", task.shelf_id)
-    #             raise e

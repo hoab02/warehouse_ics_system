@@ -52,20 +52,7 @@ class ExecutionTaskMongoRepository(ExecutionTaskRepository):
         cursor = self.col.find(
             {
                 "scenario_id": scenario_id,
-                "status": "CREATED"
+                "status": "PENDING"
             }
-        ).sort("created_at", 1)
-
-        tasks = []
-        for doc in cursor:
-            tasks.append(
-                ExecutionTask(
-                    execution_task_id=doc["execution_task_id"],
-                    scenario_id=doc["scenario_id"],
-                    station_id=doc["station_id"],
-                    shelf_id=doc["shelf_id"],
-                    status=doc["status"]
-                )
-            )
-
-        return tasks
+        ).sort("base_sequence", 1)
+        return [ExecutionTaskMapper.from_document(d) for d in cursor]

@@ -25,7 +25,7 @@ class ScenarioMongoRepository(ScenarioRepository):
 
     def get_next_queued(self):
         doc = self.col.find_one(
-            {"status": "CREATE"},
+            {"status": "CREATED"},
             sort=[("created_at", 1)]
         )
 

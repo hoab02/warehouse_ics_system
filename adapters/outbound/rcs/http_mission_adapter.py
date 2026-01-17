@@ -20,3 +20,18 @@ class RcsHttpMissionAdapter(RcsMissionPort):
             raise RuntimeError(
                 f"RCS error {resp.status_code}: {resp.text}"
             )
+
+    def send_return_mission(self, mission: dict) -> None:
+        resp = requests.post(
+            f"{self.base_url}/return_shelf",
+            json=mission,
+            headers={
+                "Idempotency-Key": mission["mission_id"]
+            },
+            timeout=5
+        )
+
+        if resp.status_code not in (200, 201, 202):
+            raise RuntimeError(
+                f"RCS error {resp.status_code}: {resp.text}"
+            )

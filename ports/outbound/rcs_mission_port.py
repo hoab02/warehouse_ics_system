@@ -6,3 +6,8 @@ class RcsMissionPort(ABC):
     def send_mission(self, mission: dict) -> None:
         """Idempotent by mission_id"""
         pass
+
+    @abstractmethod
+    def send_return_mission(self, mission: dict) -> None:
+        """Idempotent by mission_id"""
+        pass

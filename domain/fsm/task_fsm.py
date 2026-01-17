@@ -15,7 +15,7 @@ ALLOWED_TRANSITIONS = {
     TaskStatus.PENDING: {TaskStatus.DISPATCHED},
     TaskStatus.DISPATCHED: {TaskStatus.MOVING},
     TaskStatus.MOVING: {TaskStatus.AT_STATION},
-    TaskStatus.AT_STATION: {TaskStatus.WAITING_RETURN},
+    TaskStatus.AT_STATION: {TaskStatus.WAITING_RETURN},  # Có nen them trang thai RETURNING khong?
     TaskStatus.WAITING_RETURN: {TaskStatus.DONE},
 }
 

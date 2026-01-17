@@ -20,3 +20,13 @@ class MissionBuilder:
                 "method": "POST"
             }
         }
+
+    def build_return_shelf_mission(self, mission):
+
+        return {
+            "mission_type": "RETURN_SHELF",
+            "scenario_id": mission.scenario_id,
+            "execution_task_id": mission.logical_task_ids,
+            "shelf_id": mission.shelf_id,
+            "from_station": mission.station_id,
+        }

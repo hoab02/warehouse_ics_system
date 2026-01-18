@@ -17,3 +17,10 @@ class ScenarioPayload(BaseModel):
 class RcsCallbackPayload(BaseModel):
     mission_id: str
     status: str
+
+class ReturnShelfPayload(BaseModel):
+    scenario_id: str
+    shelf_id: str
+    logical_task_ids: str
+    station_id: str
+    side: str

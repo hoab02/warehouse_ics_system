@@ -37,6 +37,7 @@ from application.use_cases.create_scenario import CreateScenarioUseCase
 from application.scheduler.scheduler import Scheduler
 from application.callback.rcs_callback_handler import RcsCallbackHandler
 from application.service.mission_builder import MissionBuilder
+from application.use_cases.return_shelf import ReturnShelfUseCase
 
 
 # =========================
@@ -51,7 +52,7 @@ from adapters.outbound.wss.http_notifier_adapter import WssHttpNotifierAdapter
 # =========================
 from adapters.inbound.api.scenario_api import router as scenario_router
 from adapters.inbound.api.rcs_callback_api import router as rcs_callback_router
-
+from adapters.inbound.api.return_shelf_api import router as return_shelf_router
 # ======================================================
 # 1️⃣ FASTAPI APP
 # ======================================================
@@ -124,6 +125,11 @@ rcs_callback_handler = RcsCallbackHandler(
     status_notifier=wss_notifier_port
 )
 
+return_shelf_use_cases = ReturnShelfUseCase(
+    execution_task_repo=execution_task_repository,
+    rcs_mission_port=rcs_mission_port,
+    mission_builder=mission_builder
+)
 
 # ======================================================
 # 7️⃣ API ROUTERS
@@ -138,6 +144,12 @@ app.include_router(
     rcs_callback_router,
     prefix="/api/rcs/callback",
     tags=["RCS Callback"]
+)
+
+app.include_router(
+    return_shelf_router,
+    prefix="/api/v1",
+    tags=["Return Shelf"]
 )
 
 

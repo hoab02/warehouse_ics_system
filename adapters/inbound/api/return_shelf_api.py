@@ -1,7 +1,19 @@
-@router.post("/{execution_task_id}/return")
+from fastapi import APIRouter, Depends
+from application.use_cases.return_shelf import ReturnShelfUseCase
+from adapters.inbound.api.schemas import ReturnShelfPayload
+
+router = APIRouter()
+
+def get_return_shelf_use_case():
+    from main import return_shelf_use_cases
+    return return_shelf_use_cases
+
+# @router.post("/{logical_task_ids}/return")
+@router.post("/return")
 def return_shelf(
-    execution_task_id: str,
-    use_case: ReturnShelfUseCase = Depends(get_return_shelf_uc),
+    payload: ReturnShelfPayload,
+    use_case: ReturnShelfUseCase = Depends(get_return_shelf_use_case),
 ):
-    use_case.execute(execution_task_id)
+    logical_task_ids = payload.logical_task_ids
+    use_case.execute_return(logical_task_ids)
     return {"status": "RETURN_TRIGGERED"}

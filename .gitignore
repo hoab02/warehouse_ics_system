@@ -1,0 +1,22 @@
+# Ignore build output directories
+
+# Ignore all __pycache__ directories recursively
+__pycache__/
+
+# Ignore all .idea directories recursively
+.idea/
+
+# Include specific files in .idea if needed
+!**/.idea/misc.xml
+!**/.idea/modules.xml
+
+# Ignore everything in the LOG folder
+LOG/*
+!LOG/*.py
+Log_*
+Log*
+.log
+
+# Ignore extracted_maps folder
+
+# Ignore temp folder

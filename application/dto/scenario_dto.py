@@ -7,13 +7,12 @@ from typing import List
 class ScenarioDTO(BaseModel):
     scenario_id: str
     type: str
-    stations: List[str]
+    # stations: List[str]
     tasks: List[TaskDTO]
 
     def to_domain(self):
         return Scenario(
             scenario_id=self.scenario_id,
             scenario_type=self.type,
-            stations=self.stations,
             tasks=self.tasks,
         )

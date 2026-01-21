@@ -12,3 +12,6 @@ class DuplicateTaskError(DomainError):
 
 class InvalidSideMergeError(DomainError):
     pass
+
+class InvalidTaskOrderError(DomainError):
+    pass

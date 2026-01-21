@@ -24,17 +24,19 @@ class CreateScenarioUseCase:
             tasks.append(
                 Task(
                     sequence=t.sequence,
+                    picking_task_code=t.picking_task_code,
+                    picking_session_code=t.picking_session_code,
+                    or_code=t.or_code,
                     shelf_id=t.shelf_id,
                     station_id=t.station_id,
-                    side=Side(t.side),
+                    side=t.side
                 )
             )
 
         scenario = Scenario(
             scenario_id=scenario_dto.scenario_id,
             scenario_type = scenario_dto.type,
-            tasks=tasks,
-            stations=scenario_dto.stations
+            tasks=tasks
         )
         self.scenario_repo.save(scenario)
 

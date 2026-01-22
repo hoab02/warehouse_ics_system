@@ -24,8 +24,9 @@ class ScenarioPayload(BaseModel):
     tasks: List[TaskPayload]
 
 class RcsCallbackPayload(BaseModel):
-    mission_id: str
-    status: str
+    orderId: str
+    status: int
+    subTaskStatus: str
 
 class ReturnShelfPayload(BaseModel):
     scenario_id: str

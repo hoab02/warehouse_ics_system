@@ -9,6 +9,8 @@ class TaskStatus(str, Enum):
     AT_STATION = "AT_STATION"
     WAITING_RETURN = "WAITING_RETURN"
     DONE = "DONE"
+    FAILED = "FAILED"
+    CANCELLED = "CANCELLED"
 
 
 ALLOWED_TRANSITIONS = {

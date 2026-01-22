@@ -1,4 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
+
+from adapters.inbound.api.mappers.rcs_callback_mapper import to_command
 from application.callback.rcs_callback_handler import RcsCallbackHandler
 from adapters.inbound.api.schemas import RcsCallbackPayload
 
@@ -14,7 +16,8 @@ def rcs_callback(
     handler: RcsCallbackHandler = Depends(get_rcs_callback_handler),
 ):
     try:
-        handler.handle(payload.mission_id, payload.status)
+        command = to_command(payload)
+        handler.handle(command)
         return {"ok": True}
     except ValueError as e:
         # business error

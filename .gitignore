@@ -6,6 +6,17 @@ __pycache__/
 # Ignore all .idea directories recursively
 .idea/
 
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+
 # Include specific files in .idea if needed
 !**/.idea/misc.xml
 !**/.idea/modules.xml

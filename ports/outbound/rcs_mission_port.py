@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class RcsMissionPort(ABC):
 
     @abstractmethod
-    def send_mission(self, mission: dict) -> None:
+    def send_mission(self, mission: dict, idempotency_key: str) -> None:
         """Idempotent by mission_id"""
         pass
 

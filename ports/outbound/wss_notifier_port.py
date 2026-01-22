@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class WssNotifierPort(ABC):
 
     @abstractmethod
-    def notify_execution_task(self, task_id: str, status: str) -> None:
+    def notify_execution_task(self, mission: dict) -> None:
         pass
 
     @abstractmethod

@@ -9,11 +9,12 @@ class RcsCallbackCommand:
 
 class RcsCallbackHandler:
 
-    def __init__(self, execution_task_repo, scenario_repo, resource_lock, status_notifier):
+    def __init__(self, execution_task_repo, scenario_repo, resource_lock, status_notifier, mission_builder):
         self.execution_task_repo = execution_task_repo
         self.scenario_repo = scenario_repo
         self.resource_lock = resource_lock
         self.status_notifier = status_notifier
+        self.builder = mission_builder
 
         self._handlers = {
             TaskStatus.DONE: self._on_completed,
@@ -36,7 +37,9 @@ class RcsCallbackHandler:
 
     def _update_and_notify(self, task, status: TaskStatus):
         self.execution_task_repo.update_status(task.logical_task_ids, status)
-        self.status_notifier.notify_execution_task(task.logical_task_ids, status)
+        task = self.execution_task_repo.get(task.logical_task_ids)
+        callback_mission = self.builder.build_callback_payload(task)
+        self.status_notifier.notify_execution_task(callback_mission)
 
     def _on_completed(self, task, command):
         print(f"Mission {command.mission_id} completed")

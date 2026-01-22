@@ -44,18 +44,17 @@ class MissionBuilder:
             "from_station": mission.station_id,
         }
 
-    def build_callback_payload(self, mission):
-        pass
-        # return {
-        #     "shelf_code": execution_task.shelf_id,
-        #     "station_code": execution_task.station_id,
-        #     "data": [
-        #         {
-        #             "picking_session_code": t.picking_session_code,
-        #             "picking_task_code": t.picking_task_code,
-        #             "or_code": t.or_code,
-        #         }
-        #         for t in execution_task.merged_picking_tasks
-        #     ],
-        # }
+    def build_callback_payload(self, execution_task: ExecutionTask) -> dict:
+        return {
+            "shelf_code": execution_task.shelf_id,
+            "station_code": execution_task.station_id,
+            "data": [
+                {
+                    "picking_session_code": t.picking_session_code,
+                    "picking_task_code": t.picking_task_code,
+                    "or_code": t.or_code,
+                }
+                for t in execution_task.merged_picking_tasks
+            ],
+        }
 

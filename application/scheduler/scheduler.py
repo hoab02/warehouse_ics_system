@@ -57,10 +57,10 @@ class Scheduler:
                 mission = self.builder.build(task)
 
                 # send to RCS
-                self.rcs.send_mission(
-                    mission=mission,
-                    idempotency_key=task.logical_task_ids
-                )
+                # self.rcs.send_mission(
+                #     mission=mission,
+                #     idempotency_key=task.logical_task_ids
+                # )
 
                 # update task status
                 self.execution_task_repo.update_status(

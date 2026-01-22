@@ -132,7 +132,8 @@ rcs_callback_handler = RcsCallbackHandler(
     execution_task_repo=execution_task_repository,
     scenario_repo=scenario_repository,
     resource_lock=resource_lock_repository,
-    status_notifier=wss_notifier_port
+    status_notifier=wss_notifier_port,
+    mission_builder=mission_builder
 )
 
 return_shelf_use_cases = ReturnShelfUseCase(

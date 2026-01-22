@@ -3,17 +3,18 @@ from ports.outbound.rcs_mission_port import RcsMissionPort
 
 class RcsHttpMissionAdapter(RcsMissionPort):
 
-    def __init__(self, base_url: str):
+    def __init__(self, base_url: str, timeout: int):
         self.base_url = base_url.rstrip("/")
+        self.timeout = timeout
 
-    def send_mission(self, mission: dict) -> None:
+    def send_mission(self, mission: dict, idempotency_key: str) -> None:
         resp = requests.post(
-            f"{self.base_url}/missions",
+            f"{self.base_url}/ics/taskOrder/addTask",
             json=mission,
             headers={
-                "Idempotency-Key": mission["mission_id"]
+                "Idempotency-Key": idempotency_key
             },
-            timeout=5
+            timeout=self.timeout
         )
 
         if resp.status_code not in (200, 201, 202):
@@ -23,6 +24,7 @@ class RcsHttpMissionAdapter(RcsMissionPort):
 
     def send_return_mission(self, mission: dict) -> None:
         print("Sent return mission successfully!")
+
         # resp = requests.post(
         #     f"{self.base_url}/return_shelf",
         #     json=mission,

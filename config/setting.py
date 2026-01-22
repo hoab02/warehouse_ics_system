@@ -37,13 +37,11 @@ class Settings(BaseSettings):
     # RCS
     # =========================
     rcs_base_url: str = Field(
-        default="http://localhost:8081"
-    )
+        default="http://localhost:5888"
+    ) # url addTask
+
     rcs_timeout: int = Field(
         default=5
-    )
-    rcs_callback_url: str = Field(
-        default="http://localhost:8000/api/rcs/callback"
     )
 
     # =========================

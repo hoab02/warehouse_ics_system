@@ -38,7 +38,7 @@ from application.scheduler.scheduler import Scheduler
 from application.callback.rcs_callback_handler import RcsCallbackHandler
 from application.service.mission_builder import MissionBuilder
 from application.use_cases.return_shelf import ReturnShelfUseCase
-
+from application.service.location_service import LocationService
 
 # =========================
 # OUTBOUND ADAPTERS
@@ -53,6 +53,8 @@ from adapters.outbound.wss.http_notifier_adapter import WssHttpNotifierAdapter
 from adapters.inbound.api.scenario_api import router as scenario_router
 from adapters.inbound.api.rcs_callback_api import router as rcs_callback_router
 from adapters.inbound.api.return_shelf_api import router as return_shelf_router
+from adapters.outbound.json.json_location_adapter import JsonLocationAdapter
+
 # ======================================================
 # 1️⃣ FASTAPI APP
 # ======================================================
@@ -90,19 +92,27 @@ resource_lock_repository = MongoResourceLockRepository(db)
 # 5️⃣ OUTBOUND PORT ADAPTERS
 # ======================================================
 rcs_mission_port = RcsHttpMissionAdapter(
-    base_url=settings.rcs_base_url
+    base_url=settings.rcs_base_url,
+    timeout=settings.rcs_timeout
 )
 
 wss_notifier_port = WssHttpNotifierAdapter(
-    base_url=settings.wss_base_url
+    base_url=settings.wss_base_url,
+    timeout=settings.wss_timeout
 )
 
 
 # ======================================================
 # 6️⃣ APPLICATION SERVICES
 # ======================================================
+location_adapter = JsonLocationAdapter(
+    config_path="config/warehouse_points.json"
+)
+
+location_service = LocationService(location_adapter)
+
 mission_builder = MissionBuilder(
-    callback_url=settings.rcs_callback_url
+    location_service=location_service
 )
 
 create_scenario_use_case = CreateScenarioUseCase(

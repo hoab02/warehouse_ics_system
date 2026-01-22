@@ -1,29 +1,37 @@
 from domain.entities.execution_task import ExecutionTask
-
+from application.service.location_service import LocationService
 
 class MissionBuilder:
     """
-    Build RCS mission payload from ExecutionTask (ModelProcessCode)
+    Build RCS mission payload from ExecutionTask
     """
 
-    def __init__(self, callback_url: str):
-        self.callback_url = callback_url
+    def __init__(
+        self,
+        location_service: LocationService,
+    ):
+        self._location_service = location_service
 
-    def build(self, execution_task):
+    def build(self, execution_task: ExecutionTask) -> dict:
+        from_point = self._location_service.resolve_shelf_point(
+            execution_task.shelf_id
+        )
 
-
+        to_point = self._location_service.resolve_station_point(
+            execution_task.station_id
+        )
 
         return {
-            "mission_id": execution_task.logical_task_ids,
-            "scenario_id": execution_task.scenario_id,
-            "type": "SHELF_OPERATION",
-            "station_id": execution_task.station_id,
-            "shelf_id": execution_task.shelf_id,
-            "actions": [],
-            "callback": {
-                "url": self.callback_url,
-                "method": "POST"
-            }
+            "modelProcessCode": "chuku",
+            "priority": 6,
+            "fromSystem": "MES",
+            "orderId": execution_task.logical_task_ids,
+            "taskOrderDetail": [
+                {
+                    "taskPath": f"{from_point},{to_point}",
+                    "shelfNumber": f"{execution_task.shelf_id}"
+                }
+            ]
         }
 
     def build_return_shelf_mission(self, mission):
@@ -37,7 +45,7 @@ class MissionBuilder:
         }
 
     def build_callback_payload(self, mission):
-        print("Test")
+        pass
         # return {
         #     "shelf_code": execution_task.shelf_id,
         #     "station_code": execution_task.station_id,

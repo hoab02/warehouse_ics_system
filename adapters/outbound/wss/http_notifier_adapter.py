@@ -3,8 +3,9 @@ from ports.outbound.wss_notifier_port import WssNotifierPort
 
 class WssHttpNotifierAdapter(WssNotifierPort):
 
-    def __init__(self, base_url: str):
+    def __init__(self, base_url: str, timeout: int):
         self.base_url = base_url.rstrip("/")
+        self.timeout = timeout
 
     def notify_execution_task(self, task_id: str, status: str):
         print("Notify Execution Task Status to WSS Successfully!")

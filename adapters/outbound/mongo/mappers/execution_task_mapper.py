@@ -26,21 +26,6 @@ class ExecutionTaskMapper:
         }
 
 
-    # @staticmethod
-    # def from_document(doc: dict) -> ExecutionTask:
-    #     task = ExecutionTask(
-    #         doc["scenario_id"],
-    #         doc["station_id"],
-    #         doc["shelf_id"],
-    #         doc["logical_task_ids"],
-    #         doc["base_sequence"],
-    #         doc["merged_picking_tasks"],
-    #         doc["need_rotate"],
-    #         doc["target_side"],
-    #     )
-    #     task.status = doc["status"]
-    #     return task
-
     @staticmethod
     def from_document(doc: dict) -> ExecutionTask:
         task = ExecutionTask(

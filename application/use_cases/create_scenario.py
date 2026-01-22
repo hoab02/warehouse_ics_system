@@ -1,6 +1,6 @@
-# app/application/create_scenario.py
 from domain.entities.scenario import Scenario
 from domain.entities.task import Task, Side
+from domain.exceptions import ScenarioAlreadyExistsException
 from domain.validators.scenario_validator import validate_scenario_tasks
 from domain.mergers.task_merger import merge_tasks
 
@@ -17,8 +17,12 @@ class CreateScenarioUseCase:
     def execute(self, scenario_dto):
         existing = self.scenario_repo.get(scenario_dto.scenario_id)
         if existing:
-            return existing.scenario_id
+            raise ScenarioAlreadyExistsException(
+                f"Scenario {scenario_dto.scenario_id} already exists"
+            )
+
         validate_scenario_tasks(scenario_dto.tasks)
+
         tasks = []
         for idx, t in enumerate(scenario_dto.tasks):
             tasks.append(

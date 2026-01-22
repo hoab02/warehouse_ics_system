@@ -23,10 +23,6 @@ class ScenarioMapper:
             for t in doc.get("tasks", [])
         ]
 
-        # station_ids = list(dict.fromkeys(
-        #     t.station_id for t in tasks
-        # ))
-
         scenario = Scenario(
             doc["scenario_id"],
             doc["type"],

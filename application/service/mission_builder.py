@@ -11,6 +11,8 @@ class MissionBuilder:
 
     def build(self, execution_task):
 
+
+
         return {
             "mission_id": execution_task.logical_task_ids,
             "scenario_id": execution_task.scenario_id,

@@ -4,14 +4,12 @@ class DomainError(Exception):
 class InvalidStateTransition(DomainError):
     pass
 
-class StationOccupied(DomainError):
-    pass
-
-class DuplicateTaskError(DomainError):
-    pass
-
-class InvalidSideMergeError(DomainError):
+class ScenarioValidationException(DomainError):
     pass
 
 class InvalidTaskOrderError(DomainError):
     pass
+
+class ScenarioAlreadyExistsException(DomainError):
+    pass
+

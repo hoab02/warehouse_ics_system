@@ -15,11 +15,10 @@ class Scheduler:
         self.builder = mission_builder
 
     def tick(self):
-        # chọn scenario đang chạy
         scenario = self.scenario_repo.get_running()
 
         if not scenario:
-            # nếu chưa có → lấy scenario kế tiếp
+            # nếu chưa có → lấy scenario kế
             scenario = self.scenario_repo.get_next_queued()
             if not scenario:
                 return
@@ -58,7 +57,7 @@ class Scheduler:
                 mission = self.builder.build(task)
 
                 # send to RCS
-                # self.rcs.send_mission(mission)
+                self.rcs.send_mission(mission)
 
                 # update task status
                 self.execution_task_repo.update_status(

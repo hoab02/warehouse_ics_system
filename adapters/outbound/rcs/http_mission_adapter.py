@@ -8,30 +8,31 @@ class RcsHttpMissionAdapter(RcsMissionPort):
         self.timeout = timeout
 
     def send_mission(self, mission: dict, idempotency_key: str) -> None:
-        resp = requests.post(
-            f"{self.base_url}/ics/taskOrder/addTask",
-            json=mission,
-            headers={
-                "Idempotency-Key": idempotency_key
-            },
-            timeout=self.timeout
-        )
-
-        if resp.status_code not in (200, 201, 202):
-            raise RuntimeError(
-                f"RCS error {resp.status_code}: {resp.text}"
-            )
-
-    def send_return_mission(self, mission: dict) -> None:
-        print("Sent return mission successfully!")
-
+        print(f"Sent to RCS: {mission}")
         # resp = requests.post(
-        #     f"{self.base_url}/return_shelf",
+        #     f"{self.base_url}/ics/taskOrder/addTask",
         #     json=mission,
         #     headers={
-        #         "Idempotency-Key": mission["mission_id"]
+        #         "Idempotency-Key": idempotency_key
         #     },
-        #     timeout=5
+        #     timeout=self.timeout
+        # )
+        #
+        # if resp.status_code not in (200, 201, 202):
+        #     raise RuntimeError(
+        #         f"RCS error {resp.status_code}: {resp.text}"
+        #     )
+
+    def send_return_mission(self, mission: dict, idempotency_key: str) -> None:
+        print(f"Sent return mission successfully: {mission}")
+
+        # resp = requests.post(
+        #     f"{self.base_url}/ics/out/task/continueTask",
+        #     json=mission,
+        #     headers={
+        #         "Idempotency-Key": idempotency_key
+        #     },
+        #     timeout=self.timeout
         # )
         #
         # if resp.status_code not in (200, 201, 202):

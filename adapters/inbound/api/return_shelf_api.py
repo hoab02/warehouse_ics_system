@@ -9,11 +9,12 @@ def get_return_shelf_use_case():
     return return_shelf_use_cases
 
 # @router.post("/{logical_task_ids}/return")
-@router.post("/return")
+@router.post("")
 def return_shelf(
     payload: ReturnShelfPayload,
     use_case: ReturnShelfUseCase = Depends(get_return_shelf_use_case),
 ):
-    logical_task_ids = payload.logical_task_ids
-    use_case.execute_return(logical_task_ids)
+    print("Hello")
+    station_id = payload.station_code
+    use_case.execute_return(station_id)
     return {"status": "RETURN_TRIGGERED"}

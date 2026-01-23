@@ -7,3 +7,6 @@ class Collections:
 def ensure_indexes(db):
     db[Collections.EXECUTION_TASKS].create_index("scenario_id")
     db[Collections.EXECUTION_TASKS].create_index("status")
+    db[Collections.EXECUTION_TASKS].create_index(
+        [("station_id", 1), ("status", 1)]
+    )

@@ -8,23 +8,18 @@ class ReturnShelfUseCase:
         self.rcs = rcs_mission_port
         self.builder = mission_builder
 
-    def execute_return(self, logical_task_ids: str):
-        task = self.execution_task_repo.get(logical_task_ids)
+    def execute_return(self, station_id: str):
+        task = self.execution_task_repo.get_active_by_station(station_id)
 
         if not task:
             raise ValueError("ExecutionTask not found")
 
-        if task.status != TaskStatus.AT_STATION:
-            raise ValueError(
-                f"Task not ready for return, status={task.status}"
-            )
-
         self.execution_task_repo.update_status(
-            logical_task_ids,
+            task.logical_task_ids,
             TaskStatus.WAITING_RETURN
         ) # tránh race condition
 
         mission = self.builder.build_return_shelf_mission(task)
 
         # send return mission
-        self.rcs.send_return_mission(mission)
+        self.rcs.send_return_mission(mission, task.logical_task_ids)

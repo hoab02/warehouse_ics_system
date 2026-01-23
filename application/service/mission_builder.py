@@ -35,17 +35,13 @@ class MissionBuilder:
         }
 
     def build_return_shelf_mission(self, mission):
-
         return {
-            "mission_type": "RETURN_SHELF",
-            "scenario_id": mission.scenario_id,
-            "execution_task_id": mission.logical_task_ids,
-            "shelf_id": mission.shelf_id,
-            "from_station": mission.station_id,
+            "orderId": mission.logical_task_ids
         }
 
     def build_callback_payload(self, execution_task: ExecutionTask) -> dict:
         return {
+            "scenario_id": execution_task.scenario_id,
             "shelf_code": execution_task.shelf_id,
             "station_code": execution_task.station_id,
             "data": [

@@ -1,6 +1,7 @@
 from typing import List
 
 from domain.entities.execution_task import ExecutionTask
+from domain.fsm.task_fsm import TaskStatus
 from ports.repositories.execution_task_repository import ExecutionTaskRepository
 from adapters.outbound.mongo.mappers.execution_task_mapper import ExecutionTaskMapper
 from adapters.outbound.mongo.collections import Collections
@@ -23,6 +24,19 @@ class ExecutionTaskMongoRepository(ExecutionTaskRepository):
 
     def get(self, task_id):
         doc = self.col.find_one({"logical_task_ids": task_id})
+        return ExecutionTaskMapper.from_document(doc) if doc else None
+
+    def get_active_by_station(
+            self,
+            station_id: str
+    ) -> ExecutionTask:
+        doc = self.col.find_one(
+            {
+                "station_id": station_id,
+                "status": TaskStatus.AT_STATION
+            }
+        )
+
         return ExecutionTaskMapper.from_document(doc) if doc else None
 
     def get_by_scenario(self, scenario_id) -> list[ExecutionTask]:

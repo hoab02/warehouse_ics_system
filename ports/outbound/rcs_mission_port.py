@@ -8,6 +8,6 @@ class RcsMissionPort(ABC):
         pass
 
     @abstractmethod
-    def send_return_mission(self, mission: dict) -> None:
+    def send_return_mission(self, mission: dict, idempotency_key: str) -> None:
         """Idempotent by mission_id"""
         pass

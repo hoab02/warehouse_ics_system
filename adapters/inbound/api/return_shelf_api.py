@@ -14,7 +14,6 @@ def return_shelf(
     payload: ReturnShelfPayload,
     use_case: ReturnShelfUseCase = Depends(get_return_shelf_use_case),
 ):
-    print("Hello")
     station_id = payload.station_code
     use_case.execute_return(station_id)
     return {"status": "RETURN_TRIGGERED"}

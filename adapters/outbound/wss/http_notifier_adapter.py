@@ -9,10 +9,10 @@ class WssHttpNotifierAdapter(WssNotifierPort):
 
     def notify_execution_task(self, mission: dict):
         print(f"Notify Execution Task Status to WSS Successfully: {mission}")
-        requests.post(
-            f"{self.base_url}/api/v1/events/robot",
-            json=mission
-        )
+        # requests.post(
+        #     f"{self.base_url}/api/v1/events/robot",
+        #     json=mission
+        # )
 
     def notify_scenario(self, scenario_id: str, status: str):
         print(f"Notify Scenario Status {scenario_id} to WSS Successfully: {status}!")

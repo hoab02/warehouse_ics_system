@@ -17,7 +17,7 @@ class ReturnShelfUseCase:
         self.execution_task_repo.update_status(
             task.logical_task_ids,
             TaskStatus.WAITING_RETURN
-        ) # tránh race condition
+        ) # avoid race condition
 
         mission = self.builder.build_return_shelf_mission(task)
 

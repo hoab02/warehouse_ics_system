@@ -1,6 +1,11 @@
 from domain.entities.execution_task import ExecutionTask, CompletedPickingTask
 from domain.entities.task import Side
 
+def build_logical_task_id(scenario_id, block):
+    start = block[0].sequence
+    end = block[-1].sequence
+    return f"{scenario_id}:MERGE[{start}-{end}]"
+
 def merge_tasks(scenario_id, tasks):
     execution_tasks = []
     i = 0
@@ -45,12 +50,14 @@ def merge_tasks(scenario_id, tasks):
             for t in block
         ]
 
+        logical_task_ids = build_logical_task_id(scenario_id, block)
+
         execution_tasks.append(
             ExecutionTask(
                 scenario_id=scenario_id,
                 shelf_id=first.shelf_id,
                 station_id=first.station_id,
-                logical_task_ids = f"{scenario_id}:merge{len(block)}",
+                logical_task_ids = logical_task_ids,
                 target_side=main_side,
                 need_rotate=need_rotate,
                 base_sequence=first.sequence,

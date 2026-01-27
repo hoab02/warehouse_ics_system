@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     # RCS
     # =========================
     rcs_base_url: str = Field(
-        default="http://localhost:5888"
+        default="http://localhost:7000"
     ) # url addTask
 
     rcs_timeout: int = Field(

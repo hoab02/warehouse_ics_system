@@ -4,6 +4,8 @@ class RcsStatusMapper:
 
     _MAP = {
         ("3", 8): TaskStatus.DONE,
+        ("3", 10): TaskStatus.AT_STATION,
+        ("2", 6): TaskStatus.RETURNING
     }
 
     @classmethod

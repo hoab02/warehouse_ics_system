@@ -1,3 +1,6 @@
+from domain.fsm.scenario_fsm import ScenarioStatus
+
+
 class Scheduler:
 
     def __init__(
@@ -24,7 +27,7 @@ class Scheduler:
                 return
 
             self.scenario_repo.update_status(
-                scenario.scenario_id, "RUNNING"
+                scenario.scenario_id, ScenarioStatus.RUNNING
             )
 
         # chỉ lấy task của scenario này

@@ -22,7 +22,7 @@ class MissionBuilder:
         )
 
         return {
-            "modelProcessCode": "chuku",
+            "modelProcessCode": "ICS_VTP",
             "priority": 6,
             "fromSystem": "MES",
             "orderId": execution_task.logical_task_ids,

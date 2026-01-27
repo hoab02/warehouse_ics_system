@@ -153,7 +153,7 @@ app.include_router(
 
 app.include_router(
     rcs_callback_router,
-    prefix="/api/rcs/callback",
+    prefix="/api/report_task_status",
     tags=["RCS Callback"]
 )
 

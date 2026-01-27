@@ -8,6 +8,7 @@ class TaskStatus(str, Enum):
     MOVING = "MOVING"
     AT_STATION = "AT_STATION"
     WAITING_RETURN = "WAITING_RETURN"
+    RETURNING = "RETURNING"
     DONE = "DONE"
     FAILED = "FAILED"
     CANCELLED = "CANCELLED"
@@ -17,8 +18,9 @@ ALLOWED_TRANSITIONS = {
     TaskStatus.PENDING: {TaskStatus.DISPATCHED},
     TaskStatus.DISPATCHED: {TaskStatus.MOVING},
     TaskStatus.MOVING: {TaskStatus.AT_STATION},
-    TaskStatus.AT_STATION: {TaskStatus.WAITING_RETURN},  # Có nen them trang thai RETURNING khong?
-    TaskStatus.WAITING_RETURN: {TaskStatus.DONE},
+    TaskStatus.AT_STATION: {TaskStatus.WAITING_RETURN},
+    TaskStatus.WAITING_RETURN: {TaskStatus.RETURNING},
+    TaskStatus.RETURNING: {TaskStatus.DONE},
 }
 
 

@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
+
 from application.use_cases.return_shelf import ReturnShelfUseCase
 from adapters.inbound.api.schemas import ReturnShelfPayload
 
@@ -14,6 +15,13 @@ def return_shelf(
     payload: ReturnShelfPayload,
     use_case: ReturnShelfUseCase = Depends(get_return_shelf_use_case),
 ):
-    station_id = payload.station_code
-    use_case.execute_return(station_id)
-    return {"status": "RETURN_TRIGGERED"}
+    try:
+        station_id = payload.station_code
+        use_case.execute_return(station_id)
+        return {"status": "RETURN_TRIGGERED"}
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )

@@ -5,6 +5,9 @@ from application.dto.scenario_dto import ScenarioDTO
 from application.dto.task_dto import TaskDTO
 from application.use_cases.create_scenario import CreateScenarioUseCase
 from domain.exceptions import ScenarioAlreadyExistsException, ScenarioValidationException, InvalidTaskOrderError
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -17,6 +20,7 @@ def create_scenario(
     payload: ScenarioPayload,
     use_case: CreateScenarioUseCase = Depends(get_create_scenario_use_case)
 ):
+    logger.info("CREATE SCENARIO API CALLED")
     try:
         task_dtos = [
             TaskDTO(

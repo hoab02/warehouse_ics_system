@@ -20,7 +20,6 @@ class TaskPayload(BaseModel):
 class ScenarioPayload(BaseModel):
     scenario_id: str
     type: str
-    # stations: List[str]
     tasks: List[TaskPayload]
 
 class RcsCallbackPayload(BaseModel):

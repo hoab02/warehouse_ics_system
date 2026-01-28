@@ -22,10 +22,8 @@ env/
 !**/.idea/modules.xml
 
 # Ignore everything in the LOG folder
-LOG/*
-!LOG/*.py
-Log_*
-Log*
+logs/*
+!logs/*.py
 .log
 
 # Ignore extracted_maps folder

@@ -1,3 +1,9 @@
+from infrastructure.logging.logger import setup_logging
+# ======================================================
+# LOG
+# ======================================================
+setup_logging()
+
 import time
 from threading import Thread
 from fastapi import FastAPI
@@ -54,6 +60,8 @@ from adapters.inbound.api.scenario_api import router as scenario_router
 from adapters.inbound.api.rcs_callback_api import router as rcs_callback_router
 from adapters.inbound.api.return_shelf_api import router as return_shelf_router
 from adapters.outbound.json.json_location_adapter import JsonLocationAdapter
+
+
 
 # ======================================================
 # 1️⃣ FASTAPI APP
@@ -141,6 +149,12 @@ return_shelf_use_cases = ReturnShelfUseCase(
     rcs_mission_port=rcs_mission_port,
     mission_builder=mission_builder
 )
+
+# ======================================================
+from infrastructure.logging.middleware import logging_middleware
+app.middleware("http")(logging_middleware)
+# ======================================================
+
 
 # ======================================================
 # 7️⃣ API ROUTERS

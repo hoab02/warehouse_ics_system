@@ -16,6 +16,7 @@ class CreateScenarioUseCase:
 
     def execute(self, scenario_dto):
         existing = self.scenario_repo.get(scenario_dto.scenario_id)
+
         if existing:
             raise ScenarioAlreadyExistsException(
                 f"Scenario {scenario_dto.scenario_id} already exists"

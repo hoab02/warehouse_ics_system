@@ -12,6 +12,7 @@ RUNNING_STATUSES = {
     TaskStatus.RETURNING,
 }
 
+
 @dataclass(frozen=True)
 class RcsCallbackCommand:
     mission_id: str
@@ -95,9 +96,8 @@ class RcsCallbackHandler:
 
         if TaskStatus.FAILED in statuses:
             return ScenarioStatus.FAILED
+
         if statuses == {TaskStatus.DONE}:
             return ScenarioStatus.COMPLETED
-        if statuses & RUNNING_STATUSES:
-            return ScenarioStatus.RUNNING
 
-        return ScenarioStatus.CREATED
+        return ScenarioStatus.RUNNING

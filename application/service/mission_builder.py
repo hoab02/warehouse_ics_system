@@ -51,6 +51,6 @@ class MissionBuilder:
                     "or_code": t.or_code,
                 }
                 for t in execution_task.merged_picking_tasks
-            ],
+            ]
         }
 

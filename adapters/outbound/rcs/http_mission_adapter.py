@@ -12,9 +12,9 @@ class RcsHttpMissionAdapter(RcsMissionPort):
         resp = requests.post(
             f"{self.base_url}/ics/taskOrder/addTask",
             json=mission,
-            headers={
-                "Idempotency-Key": idempotency_key
-            },
+            # headers={
+            #     "Idempotency-Key": idempotency_key
+            # },
             timeout=self.timeout
         )
 
@@ -29,9 +29,9 @@ class RcsHttpMissionAdapter(RcsMissionPort):
         resp = requests.post(
             f"{self.base_url}/ics/out/task/continueTask",
             json=mission,
-            headers={
-                "Idempotency-Key": idempotency_key
-            },
+            # headers={
+            #     "Idempotency-Key": idempotency_key
+            # },
             timeout=self.timeout
         )
 

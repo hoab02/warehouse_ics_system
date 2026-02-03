@@ -1,10 +1,14 @@
 from domain.entities.execution_task import ExecutionTask, CompletedPickingTask
 from domain.entities.task import Side
+import uuid
+
 
 def build_logical_task_id(scenario_id, block):
     start = block[0].sequence
     end = block[-1].sequence
-    return f"{scenario_id}:MERGE[{start}-{end}]"
+    uid = uuid.uuid4()
+    return f"{scenario_id}:MERGE[{start}-{end}]:{uid}"
+
 
 def merge_tasks(scenario_id, tasks):
     execution_tasks = []

@@ -19,6 +19,9 @@ def rcs_callback(
     try:
         command = to_command(payload)
         background_tasks.add_task(handler.handle, command)
-        return {"ok": True}
+        return {
+            "code": 1000,
+            "desc": "success"
+        }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

@@ -4,9 +4,17 @@ app = Flask(__name__)
 
 
 @app.route("/api/v1/events/robot", methods=["POST"])
-def receive_robot_event():
+def receive_robot_task_event():
     mission = request.json
-    print("Received mission event:")
+    print("Received TASK event:")
+    print(mission)
+    return jsonify({"status": "ok"})
+
+
+@app.route("/api/v1/events/scenario", methods=["POST"])
+def receive_robot_scenario_event():
+    mission = request.json
+    print("Received SCENARIO event:")
     print(mission)
     return jsonify({"status": "ok"})
 

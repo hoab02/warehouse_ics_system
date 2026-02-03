@@ -5,24 +5,60 @@
       "WH-QM": {
         "shelves": {
           "SHELF-001": {
-            "point": "QM0062"
+            "point": "QM0007"
           },
           "SHELF-002": {
-            "point": "QM0065"
+            "point": "QM0013"
           },
           "SHELF-003": {
-            "point": "QM0066"
+            "point": "QM0025"
           },
           "SHELF-004": {
-            "point": "QM0069"
+            "point": "QM0031"
+          },
+          "SHELF-005": {
+            "point": "QM0043"
+          },
+          "SHELF-006": {
+            "point": "QM0009"
+          },
+          "SHELF-007": {
+            "point": "QM0015"
+          },
+          "SHELF-008": {
+            "point": "QM0027"
+          },
+          "SHELF-009": {
+            "point": "QM0033"
+          },
+          "SHELF-010": {
+            "point": "QM0045"
+          },
+          "SHELF-011": {
+            "point": "QM0046"
+          },
+          "SHELF-012": {
+            "point": "QM0012"
+          },
+          "SHELF-013": {
+            "point": "QM0018"
+          },
+          "SHELF-014": {
+            "point": "QM0030"
+          },
+          "SHELF-015": {
+            "point": "QM0036"
+          },
+          "SHELF-016": {
+            "point": "QM0048"
           }
         },
         "stations": {
           "ST-01": {
-            "point": "QM0004"
+            "point": "QM0057"
           },
           "ST-02": {
-            "point": "QM0007"
+            "point": "QM0059"
           }
         }
       }

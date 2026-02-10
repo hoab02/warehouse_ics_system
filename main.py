@@ -173,7 +173,7 @@ app.include_router(
 
 app.include_router(
     return_shelf_router,
-    prefix="/api/v1/return",
+    prefix="/api/v1/shelves/return",
     tags=["Return Shelf"]
 )
 

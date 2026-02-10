@@ -55,9 +55,15 @@ class RcsCallbackHandler:
         callback_mission = self.builder.build_callback_payload(task)
         self.status_notifier.notify_execution_task(callback_mission)
 
+    def _update_and_notify_on_complete(self, task, status: TaskStatus):
+        self.execution_task_repo.update_status(task.logical_task_ids, status)
+        task = self.execution_task_repo.get(task.logical_task_ids)
+        # callback_mission = self.builder.build_callback_payload(task)
+        # self.status_notifier.notify_execution_task(callback_mission)
+
     def _on_completed(self, task, command):
         print(f"Mission {command.mission_id} completed")
-        self._update_and_notify(task, command.status)
+        self._update_and_notify_on_complete(task, command.status)
         self._post_update(task)
 
     def _on_return(self, task, command):

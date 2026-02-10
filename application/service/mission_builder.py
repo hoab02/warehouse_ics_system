@@ -28,7 +28,7 @@ class MissionBuilder:
             "orderId": execution_task.logical_task_ids,
             "taskOrderDetail": [
                 {
-                    "taskPath": f"{from_point},{to_point}",
+                    "taskPath": f"{from_point},{to_point},{from_point}",
                     "shelfNumber": f"{execution_task.shelf_id}"
                 }
             ]

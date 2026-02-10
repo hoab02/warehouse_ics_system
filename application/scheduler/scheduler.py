@@ -75,5 +75,6 @@ class Scheduler:
                 # rollback
                 self.lock.release("station", task.station_id)
                 self.lock.release("shelf", task.shelf_id)
+                self.scenario_repo.update_status(task.scenario_id, ScenarioStatus.FAILED)
                 raise e
 

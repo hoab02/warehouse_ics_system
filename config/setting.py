@@ -37,8 +37,8 @@ class Settings(BaseSettings):
     # RCS
     # =========================
     rcs_base_url: str = Field(
-        default="http://localhost:7000"
-    ) # url addTask
+        default="http://192.168.100.100:7000"
+    )  # url addTask
 
     rcs_timeout: int = Field(
         default=5
@@ -48,7 +48,7 @@ class Settings(BaseSettings):
     # WSS
     # =========================
     wss_base_url: str = Field(
-        default="http://localhost:8082"
+        default="http://192.168.20.103:9600"
     )
     wss_timeout: int = Field(
         default=5

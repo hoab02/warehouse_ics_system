@@ -1,9 +1,9 @@
-from infrastructure.logging.logger import setup_logging
 # ======================================================
 # LOG
 # ======================================================
-setup_logging()
-
+from adapters.outbound.logging.logger_adapter import FileLoggerAdapter
+logger = FileLoggerAdapter(log_dir="logs")
+# ======================================================
 import time
 from threading import Thread
 from fastapi import FastAPI
@@ -151,8 +151,6 @@ return_shelf_use_cases = ReturnShelfUseCase(
 )
 
 # ======================================================
-from infrastructure.logging.middleware import logging_middleware
-app.middleware("http")(logging_middleware)
 # ======================================================
 
 

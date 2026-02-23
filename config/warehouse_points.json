@@ -4,28 +4,22 @@
     "warehouses": {
       "WH-QM": {
         "shelves": {
-          "VT01": {
-            "point": "QM0007"
+          "R01": {
+            "point": "QM0023"
           },
-          "VT02": {
-            "point": "QM0013"
+          "R02": {
+            "point": "QM0079"
           },
-          "VT03": {
-            "point": "QM0025"
-          },
-          "VT04": {
-            "point": "QM0031"
-          },
-          "VT05": {
-            "point": "QM0043"
+          "R03": {
+            "point": "QM0035"
           }
         },
         "stations": {
-          "STA_001": {
-            "point": "QM0064"
+          "SIT01": {
+            "point": "QM0063"
           },
-          "STA_002": {
-            "point": "QM0066"
+          "SIT02": {
+            "point": "QM0084"
           }
         }
       }

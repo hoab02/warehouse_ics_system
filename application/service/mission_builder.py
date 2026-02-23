@@ -29,7 +29,7 @@ class MissionBuilder:
             "taskOrderDetail": [
                 {
                     "taskPath": f"{from_point},{to_point},{from_point}",
-                    "shelfNumber": f"{execution_task.shelf_id}"
+                    "shelfNumber": ""
                 }
             ]
         }

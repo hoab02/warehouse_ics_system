@@ -17,7 +17,8 @@ def return_shelf(
 ):
     try:
         station_id = payload.station_code
-        use_case.execute_return(station_id)
+        scenario_id = payload.scenario_id
+        use_case.execute_return(station_id, scenario_id)
         return {"status": "RETURN_TRIGGERED"}
 
     except Exception as e:

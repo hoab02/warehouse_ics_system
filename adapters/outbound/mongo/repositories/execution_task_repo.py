@@ -39,6 +39,21 @@ class ExecutionTaskMongoRepository(ExecutionTaskRepository):
 
         return ExecutionTaskMapper.from_document(doc) if doc else None
 
+    def get_active_by_station_and_scenario(
+            self,
+            station_id: str,
+            scenario_id: str
+    ) -> ExecutionTask:
+        doc = self.col.find_one(
+            {
+                "station_id": station_id,
+                "scenario_id": scenario_id,
+                "status": TaskStatus.AT_STATION.value
+            }
+        )
+
+        return ExecutionTaskMapper.from_document(doc) if doc else None
+
     def get_by_scenario(self, scenario_id) -> list[ExecutionTask]:
         """
         Return ALL execution tasks for a scenario.

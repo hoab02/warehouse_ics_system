@@ -31,3 +31,7 @@ class ReturnShelfPayload(BaseModel):
     scenario_id: str
     shelf_code: str
     station_code: str
+
+class CreateScenarioResponse(BaseModel):
+    scenario_id: str
+    status: str

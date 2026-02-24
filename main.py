@@ -106,7 +106,8 @@ rcs_mission_port = RcsHttpMissionAdapter(
 
 wss_notifier_port = WssHttpNotifierAdapter(
     base_url=settings.wss_base_url,
-    timeout=settings.wss_timeout
+    timeout=settings.wss_timeout,
+    logger=logger
 )
 
 

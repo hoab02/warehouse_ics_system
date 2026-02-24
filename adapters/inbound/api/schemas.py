@@ -35,3 +35,8 @@ class ReturnShelfPayload(BaseModel):
 class CreateScenarioResponse(BaseModel):
     scenario_id: str
     status: str
+
+class ReturnShelfResponse(BaseModel):
+    status: str
+    scenario_id: str
+    station_id: str

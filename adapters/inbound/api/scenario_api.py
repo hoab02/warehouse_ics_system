@@ -41,12 +41,13 @@ def create_scenario(
         source="API_CREATE_SCENARIO",
     )
 
+    payload_dict = payload.model_dump()
+
     logger.info(
         event="API_CREATE_SCENARIO_REQUEST",
         context=context,
         fields={
-            "task_count": len(payload.tasks),
-            "scenario_type": payload.type,
+            "message": payload_dict,
         },
     )
 
